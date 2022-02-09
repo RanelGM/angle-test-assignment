@@ -1,0 +1,60 @@
+.nav-button {
+  @include viewport--1023 {
+    display: block;
+  }
+
+  position: relative;
+  z-index: 2;
+  display: none;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+}
+
+.nav-button__menu {
+  &,
+  &::before,
+  &::after {
+    position: relative;
+    display: block;
+    width: 28px;
+    height: 2px;
+    background-color: $color-black;
+  }
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    top: 10px;
+  }
+
+  &::after {
+    top: -10px;
+  }
+
+  .nav-button &,
+  .nav-button &::before,
+  .nav-button &::after {
+    transition: background-color 0.3s 0.3s, transform 0.3s, top 0.3s 0.3s;
+  }
+
+  .nav-button--open & {
+    background-color: transparent;
+    transition: background-color 0s 0.3s;
+
+    &::before {
+      top: 0;
+      transition: top 0.3s, transform 0.3s 0.3s;
+      transform: rotate(-45deg);
+    }
+
+    &::after {
+      top: 0;
+      transition: top 0.3s, transform 0.3s 0.3s;
+      transform: rotate(45deg);
+    }
+  }
+}

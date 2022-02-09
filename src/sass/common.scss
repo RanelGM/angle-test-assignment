@@ -1,0 +1,60 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.body {
+  margin: 0;
+  font-weight: 400;
+  font-size: 16px;
+  font-family: "Roboto", "Arial", sans-serif;
+  line-height: 19px;
+}
+
+.wrapper {
+  @include viewport--1023 {
+    padding: 30px 24px;
+  }
+
+  @include viewport--767 {
+    padding: 16px;
+  }
+
+  max-width: $desktop-max-width;
+  margin: 0 auto;
+  padding: 30px $desktop-extra-content-padding;
+}
+
+.visually-hidden {
+  position: absolute;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  white-space: nowrap;
+  clip-path: inset(100%);
+}
+
+.button {
+  position: relative;
+  border: none;
+  background-color: transparent;
+}
+
+// Скрывает скачки анимации при изменении размера экрана
+
+@keyframes disableBreakpointAnimation {
+  0% {
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
+}

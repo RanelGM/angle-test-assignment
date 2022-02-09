@@ -1,0 +1,37 @@
+.search-form {
+  @include viewport--767 {
+    width: auto;
+  }
+
+  position: relative;
+  display: flex;
+  width: 26.57%;
+  padding-top: 3px;
+}
+
+.search-form__button {
+  padding: 0;
+}
+
+.search-form__label {
+  @include viewport--767 {
+    display: none;
+  }
+
+  width: 100%;
+  margin-left: 19px;
+}
+
+.search-form__input {
+  width: 100%;
+  padding: 1px 1px 4px;
+  border-width: 0 0 1px;
+  border-color: $color-grey;
+  color: $color-black;
+  font-size: 18px;
+  line-height: 21px;
+
+  &::placeholder {
+    color: $color-grey;
+  }
+}

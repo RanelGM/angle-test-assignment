@@ -1,0 +1,17 @@
+@mixin viewport--1189 {
+  @media (max-width: ($desktop-max-width - 1)) {
+    @content;
+  }
+}
+
+@mixin viewport--1023 {
+  @media (max-width: ($desktop-min-width - 1)) {
+    @content;
+  }
+}
+
+@mixin viewport--767 {
+  @media (max-width: ($tablet-min-width - 1)) {
+    @content;
+  }
+}

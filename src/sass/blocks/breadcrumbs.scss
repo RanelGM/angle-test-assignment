@@ -1,0 +1,35 @@
+.breadcrumbs__list {
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+.breadcrumbs__item {
+  position: relative;
+  display: flex;
+  margin-right: 27px;
+  list-style: none;
+
+  &::after {
+    content: "/";
+    position: absolute;
+    top: 5px;
+    right: -18px;
+  }
+
+  &:last-child::after {
+    content: none;
+  }
+}
+
+.breadcrumbs__link {
+  padding: 5px 0;
+  color: $color-grey;
+  font-size: 18px;
+  line-height: 21px;
+  text-decoration: none;
+
+  .breadcrumbs__item:last-child & {
+    color: $color-black;
+  }
+}
