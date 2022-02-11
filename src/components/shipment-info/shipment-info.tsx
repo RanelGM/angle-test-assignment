@@ -1,9 +1,9 @@
 import { ChangeEvent } from "react";
 
-import getMockData from "utils/mock-data";
+import { getPixelStaticMockData } from "utils/mock-data";
 import { CustomSelect, ProductList } from "./components/components";
 
-const products = getMockData();
+const products = getPixelStaticMockData();
 
 function ShipmentInfo(): JSX.Element {
   const totalCost = products.reduce((sum, product) => sum + product.price, 0);
@@ -50,13 +50,7 @@ function ShipmentInfo(): JSX.Element {
         </div>
         <form className="shipment-info__form shipment-form">
           <label className="shipment-form__label " htmlFor="address">
-            {/* <span className="shipment-form__label-text">Адрес</span> */}
-            <span
-              style={{ letterSpacing: 0.3 }}
-              className="shipment-form__label-text"
-            >
-              г. Санкт-Петербург, пр. Просвещения, д. 99, кв. 152
-            </span>
+            <span className="shipment-form__label-text">Адрес</span>
             <input
               id="address"
               className="shipment-form__input"
@@ -124,8 +118,8 @@ function ShipmentInfo(): JSX.Element {
           <ProductList products={products} />
 
           <div className="shipment-info__total">
-            <p>Итог:</p>
-            <p>{totalCost} руб.</p>
+            <p className="shipment-info__total-text">Итог:</p>
+            <p className="shipment-info__total-text">{totalCost} руб.</p>
           </div>
 
           <button className="shipment-info__button-submit" type="submit">
