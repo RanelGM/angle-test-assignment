@@ -6,11 +6,11 @@ function App(): JSX.Element {
   return (
     <>
       <Header />
-      <Breadcrumbs />
 
-      <h1 className="heading">Корзина</h1>
-
-      <ShipmentInfo />
+      <main className="page-main">
+        <Breadcrumbs />
+        <ShipmentInfo />
+      </main>
     </>
   );
 }
