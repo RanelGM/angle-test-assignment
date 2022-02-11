@@ -1,0 +1,28 @@
+.shipment-info {
+  display: flex;
+}
+
+.shipment-info__wrapper {
+  width: calc(50% - 50px);
+  margin-right: 50px;
+}
+
+.shipment-info__login {
+  display: flex;
+  margin-bottom: 25px;
+  padding: 15px 0;
+}
+
+.shipment-info__text {
+  margin: 0;
+  margin-right: 6px;
+  letter-spacing: 0.3px;
+}
+
+.shipment-info__link {
+  color: $color-grey;
+}
+
+.shipment-info .custom-select {
+  margin-bottom: 30px;
+}

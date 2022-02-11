@@ -1,7 +1,7 @@
-export const PackageTypeGroup = {
-  Without: { label: "без упаковки", value: "package-without" },
-  Standart: { label: "стандартная", value: "package-standart" },
-  Present: { label: "подарочная", value: "package-present" },
+export const PackageGroup = {
+  Without: { label: "Без упаковки", value: "package-without" },
+  Standart: { label: "Стандартная", value: "package-standart" },
+  Present: { label: "Подарочная", value: "package-present" },
 } as const;
 
 export const HeaderNavGroup = {
