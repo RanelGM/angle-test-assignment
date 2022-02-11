@@ -12,3 +12,6 @@ export const HeaderNavGroup = {
   Page5: { label: "Страница 5", ref: "/" },
   Page6: { label: "Страница 6", ref: "/" },
 } as const;
+
+export const MIN_PRODUCT_AMOUNT = 1;
+export const MAX_PRODUCT_AMOUNT = 99;

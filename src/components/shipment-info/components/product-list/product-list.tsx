@@ -12,9 +12,7 @@ function ProductList({ products }: ProductListProps): JSX.Element {
 
       <ul className="product-list__list">
         {products.map((product) => (
-          <li className="product-list__item" key={product.id}>
-            <Product product={product} />
-          </li>
+          <Product key={product.id} product={product} />
         ))}
       </ul>
     </section>

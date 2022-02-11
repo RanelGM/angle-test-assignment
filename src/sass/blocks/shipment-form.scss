@@ -47,3 +47,37 @@
     border-color: $color-black;
   }
 }
+
+.shipment-form .product-list {
+  margin-top: 69px;
+}
+
+.shipment-form__total {
+  position: absolute;
+  top: 565px;
+  left: calc(100% + 50px);
+  display: flex;
+  justify-content: space-between;
+  width: calc(100% + 50px);
+  padding: 45px 30px;
+  background-color: rgba($color: $color-black, $alpha: 0.8);
+}
+
+.shipment-form__total-text {
+  margin: 0;
+  color: $color-white;
+  font-size: 40px;
+  line-height: 46px;
+  letter-spacing: 1px;
+}
+
+.shipment-form__button-submit {
+  width: 100%;
+  padding: 23px;
+  border: 1px solid $color-black;
+  background-color: transparent;
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 23px;
+  letter-spacing: 0.3px;
+}

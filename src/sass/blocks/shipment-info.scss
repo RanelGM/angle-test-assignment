@@ -1,10 +1,8 @@
 .shipment-info {
+  position: relative;
   display: flex;
-}
-
-.shipment-info__wrapper {
+  flex-direction: column;
   width: calc(50% - 50px);
-  margin-right: 50px;
 }
 
 .shipment-info__login {
@@ -25,4 +23,16 @@
 
 .shipment-info .custom-select {
   margin-bottom: 30px;
+}
+
+.shipment-info__map {
+  position: absolute;
+  top: 0;
+  left: calc(100% + 50px);
+  width: 50%;
+  width: calc(100% + 50px);
+}
+
+.shipment-info__map-image {
+  max-width: 100%;
 }
