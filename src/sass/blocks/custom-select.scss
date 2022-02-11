@@ -1,0 +1,114 @@
+.custom-select {
+  position: relative;
+}
+
+.custom-select__button {
+  position: relative;
+  width: 100%;
+  padding: 8px 8px 8px 0;
+  border: none;
+  border-bottom: 1px solid $color-grey;
+  background-color: inherit;
+  outline: none;
+  font-size: 16px;
+  line-height: 19.2px;
+  letter-spacing: 0.3px;
+  text-align: left;
+}
+
+.custom-select__placeholder {
+  display: block;
+  color: $color-grey;
+  transition: transform 0.2s, color 0.2s;
+  transform-origin: top left;
+
+  .custom-select--selected & {
+    position: absolute;
+    transform: translateY(-16px) scale(0.75);
+  }
+}
+
+.custom-select__text {
+  opacity: 0;
+  visibility: none;
+  transition: opacity 0.2s;
+
+  .custom-select--selected & {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+.custom-select__list {
+  position: absolute;
+  top: calc(100% - 1px);
+  z-index: 1;
+  width: 100%;
+  margin: 0;
+  padding: 10px;
+  border: 1px solid $color-grey;
+  border-radius: 0 0 5px 5px;
+  background-color: $color-white;
+  opacity: 0;
+  visibility: hidden;
+  transition: visibility 0.2s, opacity 0.2s;
+
+  .custom-select--opened & {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+.custom-select__item {
+  padding: 10px;
+  color: $color-grey;
+  list-style: none;
+  cursor: pointer;
+
+  &:hover,
+  &:focus {
+    color: $color-black;
+    outline: none;
+  }
+
+  &--selected {
+    color: $color-black;
+  }
+}
+
+.custom-select__icon {
+  position: absolute;
+  top: 10px;
+  right: 0;
+  width: 17px;
+  height: 17px;
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    top: 10px;
+    right: 0;
+    width: 10px;
+    height: 1px;
+    background-color: $color-black;
+    transition: transform 0.2s;
+  }
+
+  &::before {
+    right: 7px;
+    transform: rotate(45deg);
+  }
+
+  &::after {
+    transform: rotate(-45deg);
+  }
+
+  .custom-select--opened &::before {
+    transform: rotate(-45deg);
+  }
+
+  .custom-select--opened &::after {
+    transform: rotate(45deg);
+  }
+}
