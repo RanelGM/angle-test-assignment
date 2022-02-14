@@ -1,9 +1,16 @@
 {
-  "extends": ["stylelint-config-hudochenkov/full", "stylelint-config-prettier"],
-  "plugins": ["stylelint-order", "stylelint-scss"],
+  "extends": [
+    "stylelint-config-hudochenkov/full"
+  ],
+  "plugins": [
+    "stylelint-order",
+    "stylelint-scss"
+  ],
   "overrides": [
     {
-      "files": ["**/*.scss"],
+      "files": [
+        "**/*.scss"
+      ],
       "customSyntax": "postcss-scss"
     }
   ],
@@ -11,7 +18,13 @@
     "at-rule-no-unknown": [
       true,
       {
-        "ignoreAtRules": ["function", "if", "each", "include", "mixin"]
+        "ignoreAtRules": [
+          "function",
+          "if",
+          "each",
+          "include",
+          "mixin"
+        ]
       }
     ],
     "no-unknown-animations": null
