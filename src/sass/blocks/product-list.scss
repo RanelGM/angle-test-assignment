@@ -1,4 +1,9 @@
 .product-list__heading {
+  @include viewport--767 {
+    font-size: 26px;
+    line-height: 29.9px;
+  }
+
   margin: 5px 0;
   padding: 0 1px;
   font-weight: bold;
@@ -8,6 +13,10 @@
 }
 
 .product-list__list {
+  @include viewport--767 {
+    padding-top: 10px;
+  }
+
   margin: 0;
   padding: 0;
 }

@@ -1,11 +1,21 @@
 .page-main .main-heading {
+  @include viewport--1023 {
+    font-size: 30px;
+    line-height: 34.5px;
+    letter-spacing: 1px;
+  }
+
   margin: 0;
-  font-weight: 700;
+  font-weight: bold;
   font-size: 40px;
   line-height: 46px;
   letter-spacing: 2px;
 }
 
 .page-main .breadcrumbs {
+  @include viewport--1023 {
+    margin-bottom: 25px;
+  }
+
   margin-bottom: 45px;
 }

@@ -1,4 +1,9 @@
 .product {
+  @include viewport--767 {
+    padding: 16px 35px 13px 0;
+    padding-right: 2px;
+  }
+
   display: flex;
   padding: 25px 35px 24px 0;
   border-bottom: 1px solid $color-grey-light;
@@ -6,6 +11,13 @@
 }
 
 .product__image {
+  @include viewport--767 {
+    min-width: 80px;
+    max-width: 80px;
+    max-height: 80px;
+    margin-right: 12px;
+  }
+
   object-fit: cover;
   min-width: 150px;
   margin-right: 20px;
@@ -25,6 +37,11 @@
 }
 
 .product__heading {
+  @include viewport--767 {
+    font-size: 16px;
+    line-height: 18.4px;
+  }
+
   width: 50%;
   margin: 0;
   margin-bottom: 10px;
@@ -36,6 +53,11 @@
 }
 
 .product__price {
+  @include viewport--767 {
+    font-size: 16px;
+    line-height: 18.4px;
+  }
+
   width: 50%;
   margin: 0;
   color: $color-black;
@@ -46,6 +68,10 @@
 }
 
 .product__description {
+  @include viewport--767 {
+    display: none;
+  }
+
   max-width: 150px;
   margin: 0;
   color: $color-grey;
@@ -58,6 +84,11 @@
 }
 
 .product__button-delete {
+  @include viewport--767 {
+    font-size: 12px;
+    line-height: 13.8px;
+  }
+
   align-self: flex-end;
   padding: 0;
   border: none;

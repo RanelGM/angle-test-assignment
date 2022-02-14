@@ -1,4 +1,9 @@
 .counter {
+  @include viewport--767 {
+    min-width: 81px;
+    min-height: 34px;
+  }
+
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -9,6 +14,10 @@
 
 .counter__button-increase {
   &::after {
+    @include viewport--767 {
+      width: 12px;
+    }
+
     content: "";
     position: absolute;
     top: 50%;
@@ -22,6 +31,11 @@
 
 .counter__button-decrease,
 .counter__button-increase {
+  @include viewport--767 {
+    width: 26px;
+    height: 32px;
+  }
+
   position: relative;
   width: 38px;
   height: 38px;
@@ -35,6 +49,10 @@
   }
 
   &::before {
+    @include viewport--767 {
+      width: 12px;
+    }
+
     content: "";
     position: absolute;
     top: 50%;
@@ -47,6 +65,13 @@
 }
 
 .counter__amount {
+  @include viewport--767 {
+    width: 27px;
+    height: 32px;
+    font-size: 16px;
+    line-height: 18.4px;
+  }
+
   width: 38px;
   height: 38px;
   padding: 0;

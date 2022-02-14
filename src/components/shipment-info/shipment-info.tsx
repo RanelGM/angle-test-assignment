@@ -8,33 +8,35 @@ const products = getPixelStaticMockData();
 function ShipmentInfo(): JSX.Element {
   const totalCost = products.reduce((sum, product) => sum + product.price, 0);
 
-  const handleInputFocus = (evt: ChangeEvent<HTMLInputElement>) => {
-    const inputElement = evt.target;
-    const labelElement = inputElement.parentElement;
+  const handleInputFocus = ({
+    target: input,
+  }: ChangeEvent<HTMLInputElement>) => {
+    const parent = input.parentElement;
 
-    if (!labelElement) {
+    if (!parent) {
       return;
     }
 
-    labelElement.classList.add("shipment-form__label--focused");
+    parent.classList.add("shipment-form__label--focused");
   };
 
-  const handleInputBlur = (evt: ChangeEvent<HTMLInputElement>) => {
-    const inputElement = evt.target;
-    const labelElement = inputElement.parentElement;
-    const isInputFilled = Boolean(inputElement.value.trim());
+  const handleInputBlur = ({
+    target: input,
+  }: ChangeEvent<HTMLInputElement>) => {
+    const parent = input.parentElement;
+    const isInputFilled = Boolean(input.value.trim());
 
-    if (!labelElement) {
+    if (!parent) {
       return;
     }
 
     if (isInputFilled) {
-      labelElement.classList.add("shipment-form__label--filled");
+      parent.classList.add("shipment-form__label--filled");
     } else {
-      labelElement.classList.remove("shipment-form__label--filled");
+      parent.classList.remove("shipment-form__label--filled");
     }
 
-    labelElement.classList.remove("shipment-form__label--focused");
+    parent.classList.remove("shipment-form__label--focused");
   };
 
   return (
@@ -53,16 +55,15 @@ function ShipmentInfo(): JSX.Element {
           <input
             id="address"
             className="shipment-form__input"
-            type="text"
             autoComplete="off"
             onFocus={handleInputFocus}
             onBlur={handleInputBlur}
           />
         </label>
 
-        <div className="shipment-info__map">
+        <div className="shipment-form__map">
           <img
-            className="shipment-info__map-image"
+            className="shipment-form__map-image"
             src="assets/img/map.png"
             alt="Карта с выбранным адресом доставки"
             width={555}
