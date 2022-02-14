@@ -27,6 +27,7 @@
         ]
       }
     ],
-    "no-unknown-animations": null
+    "no-unknown-animations": null,
+    "indentation": 2
   }
 }

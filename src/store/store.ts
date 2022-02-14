@@ -1,6 +1,6 @@
 import { configureStore, createReducer } from '@reduxjs/toolkit';
 import { State } from 'types/store';
-import setProducts from './action';
+import { setProducts } from './action';
 
 const initialState: State = {
   products: null,

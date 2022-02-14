@@ -1,5 +1,5 @@
-import { ProductType } from "types/product";
-import { MIN_PRODUCT_AMOUNT, MAX_PRODUCT_AMOUNT } from "utils/const";
+import { ProductType } from 'types/product';
+import { MIN_PRODUCT_AMOUNT, MAX_PRODUCT_AMOUNT } from 'utils/const';
 
 type ProductProps = {
   product: ProductType;
@@ -23,7 +23,11 @@ function Product({ product }: ProductProps): JSX.Element {
       <div className="product__wrapper">
         <div className="product__info-wrapper">
           <h3 className="product__heading">{name}</h3>
-          <p className="product__price">{price} руб.</p>
+          <p className="product__price">
+            {price}
+            {' '}
+            руб.
+          </p>
           <p className="product__description">{type}</p>
         </div>
 

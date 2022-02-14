@@ -1,5 +1,5 @@
-import { ProductType } from "types/product";
-import { Product } from "../components";
+import { ProductType } from 'types/product';
+import { Product } from '../components';
 
 type ProductListProps = {
   products: ProductType[];

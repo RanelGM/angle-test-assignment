@@ -10,7 +10,9 @@ const setProducts = createAction(
 );
 
 export const loadProducts = (): ThunkActionResult => async (dispatch): Promise<void> => {
-  const data = (await fetch(productsURL).then((response) => response.json())) as ProductType[];
+  const data = (
+    await fetch(productsURL).then((response) => response.json())
+  ) as ProductType[];
 
   dispatch(setProducts(data));
 };

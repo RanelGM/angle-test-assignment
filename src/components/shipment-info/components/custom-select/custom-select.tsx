@@ -3,9 +3,9 @@ import {
   MouseEvent as ReactMouseEvent,
   useEffect,
   useState,
-} from "react";
-import { PackageLabel } from "types/product";
-import { PackageGroup } from "utils/const";
+} from 'react';
+import { PackageLabel } from 'types/product';
+import { PackageGroup } from 'utils/const';
 
 const options = Object.values(PackageGroup);
 
@@ -27,7 +27,7 @@ function CustomSelect(): JSX.Element {
 
   const handleDocumentClick = (evt: MouseEvent) => {
     const target = evt.target as HTMLElement;
-    const isCustomSelectElement = target.closest(".custom-select");
+    const isCustomSelectElement = target.closest('.custom-select');
 
     if (!isCustomSelectElement) {
       setIsSelectOpen(false);
@@ -35,18 +35,18 @@ function CustomSelect(): JSX.Element {
   };
 
   const handleEscKeydown = (evt: KeyboardEvent) => {
-    if (evt.key === "Escape" && isSelectOpen) {
+    if (evt.key === 'Escape' && isSelectOpen) {
       setIsSelectOpen(false);
     }
   };
 
   useEffect(() => {
-    document.addEventListener("click", handleDocumentClick);
-    document.addEventListener("keydown", handleEscKeydown);
+    document.addEventListener('click', handleDocumentClick);
+    document.addEventListener('keydown', handleEscKeydown);
 
     return () => {
-      document.removeEventListener("click", handleDocumentClick);
-      document.removeEventListener("keydown", handleEscKeydown);
+      document.removeEventListener('click', handleDocumentClick);
+      document.removeEventListener('keydown', handleEscKeydown);
     };
   });
 
@@ -57,7 +57,7 @@ function CustomSelect(): JSX.Element {
   const handleSelectClick = (evt: ReactMouseEvent) => {
     const itemElement = evt.target as HTMLLIElement;
     const option = itemElement.getAttribute(
-      "data-select-label"
+      'data-select-label',
     ) as typeof selectedLabel;
 
     if (!option) {
@@ -70,12 +70,12 @@ function CustomSelect(): JSX.Element {
 
   const handleSelectKeydown = (evt: ReactKeyboardEvent) => {
     const itemElement = evt.target as HTMLLIElement;
-    const isEnterKeydown = evt.key === "Enter";
-    const isTabKeydown = evt.key === "Tab";
-    const isTabReturn = evt.shiftKey && evt.key === "Tab";
+    const isEnterKeydown = evt.key === 'Enter';
+    const isTabKeydown = evt.key === 'Tab';
+    const isTabReturn = evt.shiftKey && evt.key === 'Tab';
 
     const option = itemElement.getAttribute(
-      "data-select-label"
+      'data-select-label',
     ) as typeof selectedLabel;
 
     if (!option || (!isEnterKeydown && !isTabKeydown)) {
@@ -98,9 +98,8 @@ function CustomSelect(): JSX.Element {
 
   return (
     <div
-      className={`custom-select ${
-        isSelectOpen ? "custom-select--opened" : ""
-      } ${isOptionSelected ? "custom-select--selected" : ""}`}
+      className={`custom-select ${isSelectOpen ? 'custom-select--opened' : ''
+      } ${isOptionSelected ? 'custom-select--selected' : ''}`}
       data-select="custom-select"
     >
       <button
@@ -118,9 +117,7 @@ function CustomSelect(): JSX.Element {
 
           return (
             <li
-              className={`custom-select__item ${
-                isSelected ? "custom-select__item--selected" : ""
-              }`}
+              className={`custom-select__item ${isSelected ? 'custom-select__item--selected' : ''}`}
               tabIndex={0}
               key={`key-${option.value}`}
               data-select-label={option.label}

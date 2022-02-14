@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { HeaderNavGroup } from "utils/const";
+import { useState } from 'react';
+import { HeaderNavGroup } from 'utils/const';
 
 const navLinks = Object.values(HeaderNavGroup);
 
@@ -14,9 +14,7 @@ function Header(): JSX.Element {
     <header className="header">
       <div className="header__control-wrapper control-wrapper">
         <button
-          className={`control-wrapper__nav-button nav-button ${
-            isMenuOpen ? "nav-button--open" : ""
-          }`}
+          className={`control-wrapper__nav-button nav-button ${isMenuOpen ? 'nav-button--open' : ''}`}
           type="button"
           onClick={onMenuBtnClick}
         >
@@ -123,13 +121,17 @@ function Header(): JSX.Element {
         </ul>
       </div>
 
-      <nav className={`nav-list ${isMenuOpen ? "nav-list--open" : ""}`}>
+      <nav className={`nav-list ${isMenuOpen ? 'nav-list--open' : ''}`}>
         <ul className="nav-list__list">
           {navLinks.map((link) => (
             <li className="nav-list__item" key={link.label}>
               <a className="nav-list__link" href={link.ref}>
                 {link.label}
-                <span className="visually-hidden">Ссылка на {link.label}</span>
+                <span className="visually-hidden">
+                  Ссылка на
+                  {' '}
+                  {link.label}
+                </span>
               </a>
             </li>
           ))}

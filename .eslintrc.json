@@ -25,6 +25,15 @@
           "state"
         ]
       }
-    ]
+    ],
+    "object-curly-newline": [
+      "error",
+      {
+        "ObjectPattern": {
+          "multiline": true
+        }
+      }
+    ],
+    "import/prefer-default-export": "off"
   }
 }

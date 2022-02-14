@@ -1,6 +1,6 @@
-import Breadcrumbs from "components/breadcrumbs/breadcrumbs";
-import Header from "components/header/header";
-import ShipmentInfo from "components/shipment-info/shipment-info";
+import Breadcrumbs from 'components/breadcrumbs/breadcrumbs';
+import Header from 'components/header/header';
+import ShipmentInfo from 'components/shipment-info/shipment-info';
 
 function App(): JSX.Element {
   return (

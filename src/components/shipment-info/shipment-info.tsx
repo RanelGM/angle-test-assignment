@@ -1,28 +1,32 @@
-import { ChangeEvent } from "react";
+import { ChangeEvent, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { loadProducts } from 'store/action';
+import { ThunkActionDispatch } from 'types/store';
 
-import { getPixelStaticMockData } from "utils/mock-data";
-import { CustomSelect, ProductList } from "./components/components";
+import { getPixelStaticMockData } from 'utils/mock-data';
+import { CustomSelect, ProductList } from './components/components';
 
 const products = getPixelStaticMockData();
 
 function ShipmentInfo(): JSX.Element {
+  const dispatch = useDispatch<ThunkActionDispatch>();
   const totalCost = products.reduce((sum, product) => sum + product.price, 0);
 
-  const handleInputFocus = ({
-    target: input,
-  }: ChangeEvent<HTMLInputElement>) => {
+  useEffect(() => {
+    dispatch(loadProducts);
+  });
+
+  const handleInputFocus = ({ target: input }: ChangeEvent<HTMLInputElement>) => {
     const parent = input.parentElement;
 
     if (!parent) {
       return;
     }
 
-    parent.classList.add("shipment-form__label--focused");
+    parent.classList.add('shipment-form__label--focused');
   };
 
-  const handleInputBlur = ({
-    target: input,
-  }: ChangeEvent<HTMLInputElement>) => {
+  const handleInputBlur = ({ target: input }: ChangeEvent<HTMLInputElement>) => {
     const parent = input.parentElement;
     const isInputFilled = Boolean(input.value.trim());
 
@@ -31,12 +35,12 @@ function ShipmentInfo(): JSX.Element {
     }
 
     if (isInputFilled) {
-      parent.classList.add("shipment-form__label--filled");
+      parent.classList.add('shipment-form__label--filled');
     } else {
-      parent.classList.remove("shipment-form__label--filled");
+      parent.classList.remove('shipment-form__label--filled');
     }
 
-    parent.classList.remove("shipment-form__label--focused");
+    parent.classList.remove('shipment-form__label--focused');
   };
 
   return (
@@ -127,7 +131,11 @@ function ShipmentInfo(): JSX.Element {
 
         <div className="shipment-form__total">
           <p className="shipment-form__total-text">Итог:</p>
-          <p className="shipment-form__total-text">{totalCost} руб.</p>
+          <p className="shipment-form__total-text">
+            {totalCost}
+            {' '}
+            руб.
+          </p>
         </div>
 
         <button className="shipment-form__button-submit" type="submit">
