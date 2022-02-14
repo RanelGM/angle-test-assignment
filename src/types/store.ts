@@ -10,6 +10,5 @@ export enum ActionType {
   SetProducts = 'products/setProducts',
 }
 
-export type ThunkActionResult = ThunkAction<Promise<void>, State, undefined, Action>;
-
+export type ThunkActionResult<R = Promise<void>> = ThunkAction<R, State, undefined, Action>;
 export type ThunkActionDispatch = ThunkDispatch<State, undefined, Action>;

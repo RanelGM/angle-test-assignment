@@ -3,18 +3,20 @@ import { createAction } from '@reduxjs/toolkit';
 import { ProductType } from 'types/product';
 import { ActionType, ThunkActionResult } from 'types/store';
 import { productsURL } from 'utils/const';
+import { getPixelStaticMockData } from 'utils/mock-data';
 
-const setProducts = createAction(
+export const setProducts = createAction(
   ActionType.SetProducts,
   (products: ProductType[]) => ({ payload: products }),
 );
 
 export const loadProducts = (): ThunkActionResult => async (dispatch): Promise<void> => {
-  const data = (
-    await fetch(productsURL).then((response) => response.json())
-  ) as ProductType[];
+  // const response = await fetch('productsURL');
+  // const data = await response.json() as string;
+  // const products = JSON.parse(data) as ProductType[];
 
-  dispatch(setProducts(data));
+  // dispatch(setProducts(products));
+
+  const mockData = getPixelStaticMockData();
+  dispatch(setProducts(mockData));
 };
-
-export default setProducts;
