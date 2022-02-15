@@ -1,20 +1,35 @@
 import { ChangeEvent, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { loadProducts } from 'store/action';
-import { ThunkActionDispatch } from 'types/store';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { getPixelStaticMockData } from 'utils/mock-data';
+import { ThunkActionDispatch } from 'types/store';
+import useAsync from 'hooks/useAsync';
+import { loadProducts } from 'store/action';
+import { getProducts } from 'store/selectors';
+import LoadPending from 'components/load-pending/load-pending';
+import LoadError from 'components/load-error/load-error';
 import { CustomSelect, ProductList } from './components/components';
 
-const products = getPixelStaticMockData();
-
 function ShipmentInfo(): JSX.Element {
+  const products = useSelector(getProducts);
   const dispatch = useDispatch<ThunkActionDispatch>();
-  const totalCost = products.reduce((sum, product) => sum + product.price, 0);
+
+  const fetchProducts = async () => {
+    await dispatch(loadProducts());
+  };
+
+  const [execute, status] = useAsync(fetchProducts);
 
   useEffect(() => {
-    dispatch(loadProducts);
+    if (status.isLoading || status.isSuccess || status.isError || products) {
+      return;
+    }
+
+    // Логика catch уже зашита в кастомный хук
+    // eslint-disable-next-line @typescript-eslint/no-floating-promises
+    execute();
   });
+
+  const totalCost = products ? products.reduce((sum, product) => sum + product.price, 0) : 0;
 
   const handleInputFocus = ({ target: input }: ChangeEvent<HTMLInputElement>) => {
     const parent = input.parentElement;
@@ -127,20 +142,33 @@ function ShipmentInfo(): JSX.Element {
           />
         </label>
 
-        <ProductList products={products} />
+        {status.isError && (
+          <LoadError />
+        )}
 
-        <div className="shipment-form__total">
-          <p className="shipment-form__total-text">Итог:</p>
-          <p className="shipment-form__total-text">
-            {totalCost}
-            {' '}
-            руб.
-          </p>
-        </div>
+        {status.isLoading && !products && (
+          <LoadPending />
+        )}
 
-        <button className="shipment-form__button-submit" type="submit">
-          Купить
-        </button>
+        {products && (
+          <>
+            <ProductList products={products} />
+
+            <div className="shipment-form__total">
+              <p className="shipment-form__total-text">Итог:</p>
+              <p className="shipment-form__total-text">
+                {totalCost}
+                {' '}
+                руб.
+              </p>
+            </div>
+
+            <button className="shipment-form__button-submit" type="submit">
+              Купить
+            </button>
+          </>
+        )}
+
       </form>
     </section>
   );

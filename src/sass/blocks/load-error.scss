@@ -1,0 +1,9 @@
+.load-error {
+  padding: 15px;
+  background-color: rgba($color: $color-pale-red, $alpha: 0.9);
+}
+
+.load-error__text {
+  margin: 10px 0;
+  padding: 0;
+}
