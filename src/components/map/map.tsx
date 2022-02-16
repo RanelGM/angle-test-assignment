@@ -1,26 +1,6 @@
 import { memo, useState } from 'react';
 import { Map as YMap, Placemark, YMapsApi } from 'react-yandex-maps';
-
-type MapEvent = {
-  get(name:'coords'):number[];
-};
-
-type MapApi = {
-  geocode(request: string | number[]): Promise<GeocodeResponse>;
-};
-
-type GeoObject = {
-  getLocalities(): string[],
-  getAdministrativeAreas(): string[],
-  getThoroughfare(): string | null,
-  getPremiseNumber(): string | null,
-};
-
-type GeocodeResponse = {
-  geoObjects: {
-    get(index: number): GeoObject
-  }
-};
+import { MapEvent, MapApi } from 'types/yandex-maps';
 
 const DEFAULT_COORDS = [55.7257, 37.6471];
 
@@ -51,7 +31,6 @@ function Map() {
 
   const handleMapLoad = (yMapsApi : YMapsApi) => {
     const api = yMapsApi as MapApi;
-    // Преобразование, т.к. отсутствует поддержка Typescript
     setMapApi(api);
   };
 
