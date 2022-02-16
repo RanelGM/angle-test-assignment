@@ -1,32 +1,3 @@
-.shipment-form__map {
-  @include viewport--1023 {
-    position: static;
-    width: 100%;
-    // margin-top: 0;
-    margin-top: 35px;
-    margin-bottom: 30px;
-  }
-
-  position: absolute;
-  top: 0;
-  left: calc(100% + 50px);
-  width: 50%;
-  width: calc(100% + 50px);
-}
-
-.shipment-form__map-image {
-  @include viewport--1023 {
-    width: 100%;
-    height: 300px;
-  }
-
-  @include viewport--767 {
-    height: 200px;
-  }
-
-  max-width: 100%;
-}
-
 .shipment-form__half-wrapper {
   display: flex;
   flex-wrap: wrap;

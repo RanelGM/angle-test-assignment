@@ -7,6 +7,7 @@ import { loadProducts } from 'store/action';
 import { getProducts } from 'store/selectors';
 import LoadPending from 'components/load-pending/load-pending';
 import LoadError from 'components/load-error/load-error';
+import Map from 'components/map/map';
 import { CustomSelect, ProductList } from './components/components';
 
 function ShipmentInfo(): JSX.Element {
@@ -80,15 +81,7 @@ function ShipmentInfo(): JSX.Element {
           />
         </label>
 
-        <div className="shipment-form__map">
-          <img
-            className="shipment-form__map-image"
-            src="assets/img/map.png"
-            alt="Карта с выбранным адресом доставки"
-            width={555}
-            height={700}
-          />
-        </div>
+        <Map />
 
         <div className="shipment-form__half-wrapper">
           <label className="shipment-form__label" htmlFor="name">
