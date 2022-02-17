@@ -8,7 +8,7 @@ import { getAddress, getProducts } from 'store/selectors';
 import LoadPending from 'components/load-pending/load-pending';
 import LoadError from 'components/load-error/load-error';
 import Map from 'components/map/map';
-import { CustomSelect, ProductList } from './components/components';
+import { CustomSelect, PhoneInput, ProductList } from './components/components';
 
 function ShipmentInfo(): JSX.Element {
   const products = useSelector(getProducts);
@@ -88,13 +88,17 @@ function ShipmentInfo(): JSX.Element {
         </a>
       </div>
 
-      <form className="shipment-info__form shipment-form">
+      <form
+        className="shipment-info__form shipment-form"
+      >
         <label className="shipment-form__label " htmlFor="address">
           <span className="shipment-form__label-text">Адрес</span>
           <input
             id="address"
+            name="address"
             className="shipment-form__input"
             autoComplete="off"
+            // required
             onFocus={handleInputFocus}
             onBlur={handleInputBlur}
             ref={addressRef}
@@ -111,22 +115,13 @@ function ShipmentInfo(): JSX.Element {
               className="shipment-form__input"
               type="text"
               autoComplete="off"
+              // required
               onFocus={handleInputFocus}
               onBlur={handleInputBlur}
             />
           </label>
 
-          <label className="shipment-form__label" htmlFor="phone">
-            <span className="shipment-form__label-text">Ваш Телефон</span>
-            <input
-              id="phone"
-              className="shipment-form__input"
-              type="tel"
-              autoComplete="off"
-              onFocus={handleInputFocus}
-              onBlur={handleInputBlur}
-            />
-          </label>
+          <PhoneInput />
         </div>
 
         <label className="shipment-form__label" htmlFor="email">
@@ -136,6 +131,7 @@ function ShipmentInfo(): JSX.Element {
             className="shipment-form__input"
             type="email"
             autoComplete="off"
+            // required
             onFocus={handleInputFocus}
             onBlur={handleInputBlur}
           />

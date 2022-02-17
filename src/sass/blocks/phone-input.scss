@@ -1,0 +1,33 @@
+.phone-input__text {
+  position: absolute;
+  color: $color-grey;
+  pointer-events: none;
+  transition: transform 0.2s, color 0.2s;
+  transform: translateY(8px);
+  transform-origin: top left;
+
+  .phone-input--focused &,
+  .phone-input--filled & {
+    line-height: 13.8px;
+    transform: translateY(-8px) scale(0.75);
+  }
+
+  .phone-input--focused & {
+    color: $color-black;
+  }
+}
+
+.phone-input__input {
+  padding: 8px 8px 8px 0;
+  border: none;
+  border-bottom: 1px solid $color-grey;
+  outline: none;
+  font-size: 16px;
+  line-height: 19.2px;
+  letter-spacing: 0.3px;
+  transition: border-color 0.2s;
+
+  .phone-input--focused & {
+    border-color: $color-black;
+  }
+}
