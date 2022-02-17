@@ -1,10 +1,10 @@
-import { ChangeEvent, useEffect } from 'react';
+import { ChangeEvent, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { ThunkActionDispatch } from 'types/store';
 import useAsync from 'hooks/useAsync';
-import { loadProducts } from 'store/action';
-import { getProducts } from 'store/selectors';
+import { loadProducts, setAddress, setIsMarkUpdateRequired } from 'store/action';
+import { getAddress, getProducts } from 'store/selectors';
 import LoadPending from 'components/load-pending/load-pending';
 import LoadError from 'components/load-error/load-error';
 import Map from 'components/map/map';
@@ -12,22 +12,33 @@ import { CustomSelect, ProductList } from './components/components';
 
 function ShipmentInfo(): JSX.Element {
   const products = useSelector(getProducts);
+  const address = useSelector(getAddress);
+  const addressRef = useRef<HTMLInputElement | null>(null);
   const dispatch = useDispatch<ThunkActionDispatch>();
 
   const fetchProducts = async () => {
     await dispatch(loadProducts());
   };
 
-  const [execute, status] = useAsync(fetchProducts);
+  const [executeLoadProducts, loadStatus] = useAsync(fetchProducts);
 
   useEffect(() => {
-    if (status.isLoading || status.isSuccess || status.isError || products) {
+    if (loadStatus.isLoading || loadStatus.isSuccess || loadStatus.isError || products) {
       return;
     }
 
     // Логика catch уже зашита в кастомный хук
     // eslint-disable-next-line @typescript-eslint/no-floating-promises
-    execute();
+    executeLoadProducts();
+  });
+
+  useEffect(() => {
+    if (!address || !addressRef.current || address === addressRef.current.value) {
+      return;
+    }
+
+    addressRef.current.value = address;
+    addressRef.current.parentElement?.classList.add('shipment-form__label--filled');
   });
 
   const totalCost = products ? products.reduce((sum, product) => sum + product.price, 0) : 0;
@@ -44,7 +55,9 @@ function ShipmentInfo(): JSX.Element {
 
   const handleInputBlur = ({ target: input }: ChangeEvent<HTMLInputElement>) => {
     const parent = input.parentElement;
-    const isInputFilled = Boolean(input.value.trim());
+    const value = input.value.trim();
+    const isInputFilled = Boolean(value);
+    const isAddressInput = input === addressRef.current;
 
     if (!parent) {
       return;
@@ -57,6 +70,11 @@ function ShipmentInfo(): JSX.Element {
     }
 
     parent.classList.remove('shipment-form__label--focused');
+
+    if (isAddressInput && isInputFilled) {
+      dispatch(setAddress(value));
+      dispatch(setIsMarkUpdateRequired(true));
+    }
   };
 
   return (
@@ -69,6 +87,7 @@ function ShipmentInfo(): JSX.Element {
           Войти
         </a>
       </div>
+
       <form className="shipment-info__form shipment-form">
         <label className="shipment-form__label " htmlFor="address">
           <span className="shipment-form__label-text">Адрес</span>
@@ -78,6 +97,7 @@ function ShipmentInfo(): JSX.Element {
             autoComplete="off"
             onFocus={handleInputFocus}
             onBlur={handleInputBlur}
+            ref={addressRef}
           />
         </label>
 
@@ -135,11 +155,11 @@ function ShipmentInfo(): JSX.Element {
           />
         </label>
 
-        {status.isError && (
-          <LoadError />
+        {loadStatus.isError && (
+          <LoadError message="Возникла ошибка при загрузке списка товаров" />
         )}
 
-        {status.isLoading && !products && (
+        {loadStatus.isLoading && !products && (
           <LoadPending />
         )}
 

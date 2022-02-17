@@ -37,8 +37,6 @@ function Map() {
       return;
     }
 
-    console.log('coords new');
-
     const response = await mapApi.geocode(address);
     const geoObject = response.geoObjects.get(0);
     const newCoords = geoObject.geometry.getCoordinates();
@@ -58,8 +56,6 @@ function Map() {
     if (!mapApi || !newCoords) {
       return;
     }
-
-    console.log('address new');
 
     const response = await mapApi.geocode(newCoords);
     const geoObject = response.geoObjects.get(0);
@@ -127,7 +123,7 @@ function Map() {
       )}
 
       {isApiError && (
-        <LoadError message="Возникла ошибка при загрузке данных" mod="map" />
+        <LoadError message="Возникла ошибка при поиске адреса" mod="map" />
       )}
 
     </YMap>
