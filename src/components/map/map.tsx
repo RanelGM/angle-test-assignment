@@ -52,6 +52,8 @@ function Map() {
     updateMapPosition(newCoords);
   };
 
+  const [updateCoords, coordsStatus, discardCoordsError] = useAsync(updateCoordsByAddress);
+
   const updateAddressByCoords = async (newCoords: number[] | undefined) => {
     if (!mapApi || !newCoords) {
       return;
@@ -72,21 +74,17 @@ function Map() {
     prevAddress.current = newAddress;
     dispatch(setAddress(newAddress));
     setCoords(newCoords);
+    discardCoordsError();
 
     updateMapPosition(newCoords);
   };
 
   const [updateAddress, addressStatus] = useAsync(updateAddressByCoords);
-  const [updateCoords, coordsStatus] = useAsync(updateCoordsByAddress);
+
   const isApiError = addressStatus.isError || coordsStatus.isError || mapPositionStatus.isError;
 
   useEffect(() => {
-    if (coordsStatus.isError) {
-      setIsMarkUpdateRequired(false);
-      return;
-    }
-
-    if (!isMarkUpdateRequired || coordsStatus.isLoading || isApiError) {
+    if (!isMarkUpdateRequired || coordsStatus.isLoading) {
       return;
     }
 

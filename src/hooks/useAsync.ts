@@ -7,7 +7,7 @@ type Status = {
 };
 
 type Execute<T> = (params?: T) => Promise<void>;
-type UseAsyncResult<T> = [Execute<T>, Status];
+type UseAsyncResult<T> = [Execute<T>, Status, () => void];
 
 export default function useAsync<T>(asyncFunction: Execute<T>): UseAsyncResult<T> {
   const [isLoading, setIsLoading] = useState(false);
@@ -20,14 +20,18 @@ export default function useAsync<T>(asyncFunction: Execute<T>): UseAsyncResult<T
     isError,
   };
 
+  const discardError = useCallback(() => {
+    if (isError) {
+      setIsError(false);
+    }
+  }, [isError]);
+
   const execute = useCallback(async (params?: T) => {
     if (isSuccess) {
       setIsSuccess(false);
     }
 
-    if (isError) {
-      setIsError(false);
-    }
+    discardError();
 
     try {
       setIsLoading(true);
@@ -44,7 +48,7 @@ export default function useAsync<T>(asyncFunction: Execute<T>): UseAsyncResult<T
     } finally {
       setIsLoading(false);
     }
-  }, [asyncFunction, isSuccess, isError]);
+  }, [asyncFunction, isSuccess, discardError]);
 
-  return [execute, status];
+  return [execute, status, discardError];
 }
