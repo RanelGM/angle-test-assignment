@@ -1,5 +1,6 @@
 // Логика catch уже зашита в кастомный хук
 /* eslint-disable @typescript-eslint/no-floating-promises */
+import LoadError from 'components/load-error/load-error';
 import useAsync from 'hooks/useAsync';
 import { memo, useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -123,9 +124,12 @@ function Map() {
       }}
 
     >
-
       {coords && (
         <Placemark geometry={coords} />
+      )}
+
+      {isApiError && (
+        <LoadError message="Возникла ошибка при загрузке данных" mod="map" />
       )}
 
     </YMap>
