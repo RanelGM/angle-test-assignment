@@ -123,7 +123,7 @@ function Map() {
       )}
 
       {isApiError && (
-        <LoadError message="Возникла ошибка при поиске адреса" mod="map" />
+        <LoadError message="Возникла ошибка при поиске адреса. Измените запрос или попробуйте позднее" mod="map" />
       )}
 
     </YMap>

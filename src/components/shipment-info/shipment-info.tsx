@@ -156,7 +156,7 @@ function ShipmentInfo(): JSX.Element {
         </label>
 
         {loadStatus.isError && (
-          <LoadError message="Возникла ошибка при загрузке списка товаров" />
+          <LoadError message="Возникла ошибка при загрузке списка товаров. Попробуйте позднее" />
         )}
 
         {loadStatus.isLoading && !products && (
