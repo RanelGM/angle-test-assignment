@@ -5,6 +5,9 @@ type GeoObject = {
   getAdministrativeAreas(): string[],
   getThoroughfare(): string | null,
   getPremiseNumber(): string | null,
+  geometry: {
+    getCoordinates(): number[] | null,
+  }
 };
 
 type GeocodeResponse = {
@@ -19,4 +22,13 @@ export type MapEvent = {
 
 export type MapApi = {
   geocode(request: string | number[]): Promise<GeocodeResponse>;
+};
+
+export type MapControl = {
+  panTo(
+    coords: string | number[],
+    options?: {
+      duration: number
+    }
+  ): Promise<void>,
 };

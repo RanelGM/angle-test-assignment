@@ -10,6 +10,16 @@ export const setProducts = createAction(
   (products: ProductType[]) => ({ payload: products }),
 );
 
+export const setAddress = (createAction(
+  ActionType.SetAddress,
+  (address: string) => ({ payload: address }),
+));
+
+export const setIsMarkUpdateRequired = (createAction(
+  ActionType.SetIsMarkUpdateRequired,
+  (status: boolean) => ({ payload: status }),
+));
+
 export const loadProducts = (): ThunkActionResult => async (dispatch): Promise<void> => {
   // const response = await fetch('productsURL');
   // const data = await response.json() as string;
