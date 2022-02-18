@@ -14,7 +14,6 @@ type InputProps = {
   onBlurValueReplacer?: InputValueReplacer,
 };
 
-// function Input(props:InputProps) {
 const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
   const [value, setValue] = useState('');
   const { children, name, type, autoComplete, required } = props;

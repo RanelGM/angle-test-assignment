@@ -28,46 +28,6 @@
   margin-top: 69px;
 }
 
-.shipment-form__total {
-  @include viewport--1023 {
-    position: static;
-    width: 100%;
-    padding: 20px;
-    background-color: transparent;
-  }
-
-  @include viewport--767 {
-    padding: 24px 0;
-  }
-
-  position: absolute;
-  top: 565px;
-  left: calc(100% + 50px);
-  display: flex;
-  justify-content: space-between;
-  width: calc(100% + 50px);
-  padding: 45px 30px;
-  background-color: rgba($color: $color-black, $alpha: 0.8);
-}
-
-.shipment-form__total-text {
-  @include viewport--1023 {
-    color: $color-black;
-    font-size: 30px;
-  }
-
-  @include viewport--767 {
-    font-size: 26px;
-    line-height: 29.9px;
-  }
-
-  margin: 0;
-  color: $color-white;
-  font-size: 40px;
-  line-height: 46px;
-  letter-spacing: 1px;
-}
-
 .shipment-form__button-submit {
   @include viewport--767 {
     padding: 16px;
