@@ -100,33 +100,36 @@ function Map() {
   };
 
   return (
-    <YMap
-      className="map"
-      defaultState={{ center: DEFAULT_COORDS, zoom: 15 }}
-      modules={['geocode']}
-      width={500}
-      height={700}
-      onClick={handleMapClick}
-      onLoad={handleMapLoad}
-      instanceRef={(instance) => {
-        if (!instance) {
-          return;
-        }
+    <>
+      <YMap
+        className="map"
+        defaultState={{ center: DEFAULT_COORDS, zoom: 15 }}
+        modules={['geocode']}
+        width={500}
+        height={700}
+        onClick={handleMapClick}
+        onLoad={handleMapLoad}
+        instanceRef={(instance) => {
+          if (!instance) {
+            return;
+          }
 
-        const ref = instance as unknown as MapControl;
-        mapRef.current = ref;
-      }}
-
-    >
-      {coords && (
+          const ref = instance as unknown as MapControl;
+          mapRef.current = ref;
+        }}
+      >
+        {coords && (
         <Placemark geometry={coords} />
-      )}
+        )}
 
-      {isApiError && (
+        {isApiError && (
         <LoadError message="Возникла ошибка при поиске адреса. Измените запрос или попробуйте позднее" mod="map" />
-      )}
+        )}
 
-    </YMap>
+      </YMap>
+
+      <input className="visually-hidden" name="coords" value={coords ? coords.toString() : ''} readOnly />
+    </>
   );
 }
 

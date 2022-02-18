@@ -54,6 +54,12 @@ function ProductList(): JSX.Element {
           {' '}
           руб.
         </p>
+        <input
+          className="visually-hidden"
+          name="total-cost"
+          value={totalCost}
+          readOnly
+        />
       </div>
     </section>
   );
