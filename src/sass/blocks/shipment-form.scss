@@ -2,19 +2,8 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-}
 
-.shipment-form__label {
-  @include viewport--1023 {
-    margin-bottom: 26px;
-  }
-
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 30px;
-
-  .shipment-form__half-wrapper & {
+  & .form-label {
     @include viewport--767 {
       width: 100%;
     }
@@ -23,38 +12,12 @@
   }
 }
 
-.shipment-form__label-text {
-  position: absolute;
-  color: $color-grey;
-  pointer-events: none;
-  transition: transform 0.2s, color 0.2s;
-  transform: translateY(8px);
-  transform-origin: top left;
-
-  .shipment-form__label--focused &,
-  .shipment-form__label--filled & {
-    line-height: 13.8px;
-    transform: translateY(-8px) scale(0.75);
+.shipment-form .form-label {
+  @include viewport--1023 {
+    margin-bottom: 26px;
   }
 
-  .shipment-form__label--focused & {
-    color: $color-black;
-  }
-}
-
-.shipment-form__input {
-  padding: 8px 8px 8px 0;
-  border: none;
-  border-bottom: 1px solid $color-grey;
-  outline: none;
-  font-size: 16px;
-  line-height: 19.2px;
-  letter-spacing: 0.3px;
-  transition: border-color 0.2s;
-
-  .shipment-form__label--focused & {
-    border-color: $color-black;
-  }
+  margin-bottom: 30px;
 }
 
 .shipment-form .product-list {

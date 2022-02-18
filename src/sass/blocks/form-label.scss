@@ -1,4 +1,10 @@
-.phone-input__text {
+.form-label {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-label__text {
   position: absolute;
   color: $color-grey;
   pointer-events: none;
@@ -6,18 +12,18 @@
   transform: translateY(8px);
   transform-origin: top left;
 
-  .phone-input--focused &,
-  .phone-input--filled & {
+  .form-label--focused &,
+  .form-label--filled & {
     line-height: 13.8px;
     transform: translateY(-8px) scale(0.75);
   }
 
-  .phone-input--focused & {
+  .form-label--focused & {
     color: $color-black;
   }
 }
 
-.phone-input__input {
+.form-label__input {
   padding: 8px 8px 8px 0;
   border: none;
   border-bottom: 1px solid $color-grey;
@@ -27,7 +33,7 @@
   letter-spacing: 0.3px;
   transition: border-color 0.2s;
 
-  .phone-input--focused & {
+  .form-label--focused & {
     border-color: $color-black;
   }
 }

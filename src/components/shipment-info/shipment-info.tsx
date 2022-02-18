@@ -1,19 +1,22 @@
-import { ChangeEvent, useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { ThunkActionDispatch } from 'types/store';
 import useAsync from 'hooks/useAsync';
-import { loadProducts, setAddress, setIsMarkUpdateRequired } from 'store/action';
-import { getAddress, getProducts } from 'store/selectors';
+import { loadProducts } from 'store/action';
+import { getProducts } from 'store/selectors';
+import withPhoneMaskInput from 'hocs/withPhoneMaskInput';
+import withMapConnectedInput from 'hocs/withMapConnectedInput';
 import LoadPending from 'components/load-pending/load-pending';
 import LoadError from 'components/load-error/load-error';
 import Map from 'components/map/map';
-import { CustomSelect, PhoneInput, ProductList } from './components/components';
+import { CustomSelect, Input, ProductList } from './components/components';
+
+const WithPhoneMaskInput = withPhoneMaskInput(Input);
+const WithMapConnectedInput = withMapConnectedInput(Input);
 
 function ShipmentInfo(): JSX.Element {
   const products = useSelector(getProducts);
-  const address = useSelector(getAddress);
-  const addressRef = useRef<HTMLInputElement | null>(null);
   const dispatch = useDispatch<ThunkActionDispatch>();
 
   const fetchProducts = async () => {
@@ -32,50 +35,7 @@ function ShipmentInfo(): JSX.Element {
     executeLoadProducts();
   });
 
-  useEffect(() => {
-    if (!address || !addressRef.current || address === addressRef.current.value) {
-      return;
-    }
-
-    addressRef.current.value = address;
-    addressRef.current.parentElement?.classList.add('shipment-form__label--filled');
-  });
-
   const totalCost = products ? products.reduce((sum, product) => sum + product.price, 0) : 0;
-
-  const handleInputFocus = ({ target: input }: ChangeEvent<HTMLInputElement>) => {
-    const parent = input.parentElement;
-
-    if (!parent) {
-      return;
-    }
-
-    parent.classList.add('shipment-form__label--focused');
-  };
-
-  const handleInputBlur = ({ target: input }: ChangeEvent<HTMLInputElement>) => {
-    const parent = input.parentElement;
-    const value = input.value.trim();
-    const isInputFilled = Boolean(value);
-    const isAddressInput = input === addressRef.current;
-
-    if (!parent) {
-      return;
-    }
-
-    if (isInputFilled) {
-      parent.classList.add('shipment-form__label--filled');
-    } else {
-      parent.classList.remove('shipment-form__label--filled');
-    }
-
-    parent.classList.remove('shipment-form__label--focused');
-
-    if (isAddressInput && isInputFilled) {
-      dispatch(setAddress(value));
-      dispatch(setIsMarkUpdateRequired(true));
-    }
-  };
 
   return (
     <section className="shipment-info">
@@ -91,65 +51,17 @@ function ShipmentInfo(): JSX.Element {
       <form
         className="shipment-info__form shipment-form"
       >
-        <label className="shipment-form__label " htmlFor="address">
-          <span className="shipment-form__label-text">Адрес</span>
-          <input
-            id="address"
-            name="address"
-            className="shipment-form__input"
-            autoComplete="off"
-            // required
-            onFocus={handleInputFocus}
-            onBlur={handleInputBlur}
-            ref={addressRef}
-          />
-        </label>
-
+        <WithMapConnectedInput name="address" type="text">Адрес</WithMapConnectedInput>
         <Map />
 
         <div className="shipment-form__half-wrapper">
-          <label className="shipment-form__label" htmlFor="name">
-            <span className="shipment-form__label-text">Ваше Имя</span>
-            <input
-              id="name"
-              className="shipment-form__input"
-              type="text"
-              autoComplete="off"
-              // required
-              onFocus={handleInputFocus}
-              onBlur={handleInputBlur}
-            />
-          </label>
-
-          <PhoneInput />
+          <Input name="name" type="text">Ваше имя</Input>
+          <WithPhoneMaskInput name="phone" type="tel">Ваш Телефон</WithPhoneMaskInput>
         </div>
 
-        <label className="shipment-form__label" htmlFor="email">
-          <span className="shipment-form__label-text">Ваш Email</span>
-          <input
-            id="email"
-            className="shipment-form__input"
-            type="email"
-            autoComplete="off"
-            // required
-            onFocus={handleInputFocus}
-            onBlur={handleInputBlur}
-          />
-        </label>
-
+        <Input name="email" type="email">Ваш Email</Input>
         <CustomSelect />
-
-        <label className="shipment-form__label" htmlFor="comment">
-          <span className="shipment-form__label-text">Введите комментарий</span>
-          <input
-            id="comment"
-            className="shipment-form__input"
-            type="comment"
-            autoComplete="off"
-            onFocus={handleInputFocus}
-            onBlur={handleInputBlur}
-          />
-        </label>
+        <Input name="comment" type="text">Введите комментарий</Input>
 
         {loadStatus.isError && (
           <LoadError message="Возникла ошибка при загрузке списка товаров. Попробуйте позднее" />
