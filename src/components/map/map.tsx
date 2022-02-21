@@ -109,6 +109,10 @@ function Map() {
         height={700}
         onClick={handleMapClick}
         onLoad={handleMapLoad}
+        options={{
+          suppressMapOpenBlock: true,
+          yandexMapDisablePoiInteractivity: true,
+        }}
         instanceRef={(instance) => {
           if (!instance) {
             return;
