@@ -1,4 +1,4 @@
-import { ChangeEvent, forwardRef, useCallback, useEffect, useRef, useState } from 'react';
+import { ChangeEvent, forwardRef, KeyboardEvent, useCallback, useEffect, useRef, useState } from 'react';
 
 export type ValidationStatus = {
   [name: string]: boolean,
@@ -101,6 +101,16 @@ const Input = forwardRef<HTMLInputElement, InputProps>((props, forwardedRef) => 
     setValue(inputValue);
   };
 
+  const handleEnterKeydown = (evt: KeyboardEvent) => {
+    const input = evt.target as HTMLInputElement;
+
+    if (evt.key !== 'Enter') {
+      return;
+    }
+
+    input.blur();
+  };
+
   return (
     <label className="form-label" htmlFor={name}>
       <span className="form-label__text">{children}</span>
@@ -118,6 +128,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>((props, forwardedRef) => 
         onChange={handleInputChange}
         onFocus={handleInputFocus}
         onBlur={handleInputBlur}
+        onKeyDown={handleEnterKeydown}
       />
       {!isValid && (
         <p className="form-label__invalid-text">{`* ${errorMessage}`}</p>

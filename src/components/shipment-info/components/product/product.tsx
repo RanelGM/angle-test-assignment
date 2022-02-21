@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, KeyboardEvent, useState } from 'react';
 import { ProductType } from 'types/product';
 import { MIN_PRODUCT_AMOUNT, MAX_PRODUCT_AMOUNT } from 'utils/const';
 
@@ -57,6 +57,16 @@ function Product({ product, onProductUpdate, onProductDelete }: ProductProps): J
     onProductDelete(product);
   };
 
+  const handleEnterKeydown = (evt: KeyboardEvent) => {
+    const input = evt.target as HTMLInputElement;
+
+    if (evt.key !== 'Enter') {
+      return;
+    }
+
+    input.blur();
+  };
+
   return (
     <li className="product">
       <img
@@ -92,6 +102,7 @@ function Product({ product, onProductUpdate, onProductDelete }: ProductProps): J
             value={currentCount}
             onChange={handleAmountChange}
             onBlur={handleAmountBlur}
+            onKeyDown={handleEnterKeydown}
           />
 
           <button className="counter__button-increase" type="button" onClick={handleIncrementBtnClick}>
