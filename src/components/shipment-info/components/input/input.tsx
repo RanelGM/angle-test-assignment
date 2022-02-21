@@ -99,6 +99,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>((props, forwardedRef) => 
     }
 
     setValue(inputValue);
+    checkValidity(input);
   };
 
   const handleEnterKeydown = (evt: KeyboardEvent) => {
