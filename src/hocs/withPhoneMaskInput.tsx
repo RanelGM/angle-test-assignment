@@ -1,12 +1,14 @@
 import { ComponentType } from 'react';
 
 const COUNTRY_CODE = '+7';
+const MATRIX = `${COUNTRY_CODE} (___) ___ __ __`;
 
 function withPhoneMaskInput<T>(Component: ComponentType<T>) {
   function WithPhoneMaskInput(props: T) {
+    const invalidMessage = `Введите в формате: ${COUNTRY_CODE} (123) 456 78 90`;
+
     const replaceValueByMask = (value: string) => {
-      const matrix = `${COUNTRY_CODE} (___) ___ __ __`;
-      const matrixNumericString = matrix.replace(/\D/g, '');
+      const matrixNumericString = MATRIX.replace(/\D/g, '');
       let inputNumericString = value.replace(/\D/g, '');
       let inputCharCounter = 0;
 
@@ -32,7 +34,7 @@ function withPhoneMaskInput<T>(Component: ComponentType<T>) {
         }
       };
 
-      return matrix.replace(/./g, replacer);
+      return MATRIX.replace(/./g, replacer);
     };
 
     const replaceValueOnFocus = (value: string) => {
@@ -54,10 +56,11 @@ function withPhoneMaskInput<T>(Component: ComponentType<T>) {
     return (
       <Component
         {...props}
+        minLength={MATRIX.length}
+        invalidMessage={invalidMessage}
         onChangeValueReplacer={replaceValueByMask}
         onFocusValueReplacer={replaceValueOnFocus}
         onBlurValueReplacer={replaceValueOnBlur}
-        on
       />
     );
   }

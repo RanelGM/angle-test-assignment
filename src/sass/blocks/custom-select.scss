@@ -112,3 +112,15 @@
     transform: rotate(45deg);
   }
 }
+
+.custom-select__invalid-text {
+  @include viewport--1023 {
+    top: 35px;
+  }
+
+  position: absolute;
+  top: 40px;
+  margin: 0;
+  color: $color-red;
+  font-size: 12px;
+}

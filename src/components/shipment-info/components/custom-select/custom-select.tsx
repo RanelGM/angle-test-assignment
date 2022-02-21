@@ -1,11 +1,15 @@
-import {
-  KeyboardEvent as ReactKeyboardEvent,
-  MouseEvent as ReactMouseEvent,
-  useEffect,
-  useState,
-} from 'react';
+import { KeyboardEvent as ReactKeyboardEvent, MouseEvent as ReactMouseEvent, useEffect, useState } from 'react';
 import { PackageLabel } from 'types/product';
 import { PackageGroup } from 'utils/const';
+
+type ValidationStatus = {
+  [name: string]: boolean,
+};
+
+type CustomSelectProps = {
+  isValidCheck?: boolean,
+  onValidCheck?: (status: ValidationStatus) => void,
+};
 
 const options = Object.values(PackageGroup);
 
@@ -19,11 +23,29 @@ const getValueFromLabel = (label: PackageLabel | null) => {
   return value;
 };
 
-function CustomSelect(): JSX.Element {
+function CustomSelect({ isValidCheck, onValidCheck }: CustomSelectProps): JSX.Element {
+  const [isValid, setIsValid] = useState(true);
   const [isSelectOpen, setIsSelectOpen] = useState(false);
   const [selectedLabel, setSelectedLabel] = useState<PackageLabel | null>(null);
   const isOptionSelected = selectedLabel !== null;
   const selectedValue = getValueFromLabel(selectedLabel);
+
+  const checkValidity = () => {
+    const isSelectValid = Boolean(selectedLabel);
+    setIsValid(isSelectValid);
+
+    if (onValidCheck) {
+      onValidCheck({ 'custom-select': isSelectValid });
+    }
+  };
+
+  useEffect(() => {
+    if (!isValidCheck) {
+      return;
+    }
+
+    checkValidity();
+  });
 
   const handleDocumentClick = (evt: MouseEvent) => {
     const target = evt.target as HTMLElement;
@@ -66,6 +88,10 @@ function CustomSelect(): JSX.Element {
 
     setSelectedLabel(option);
     setIsSelectOpen(false);
+
+    if (!isValid) {
+      setIsValid(true);
+    }
   };
 
   const handleSelectKeydown = (evt: ReactKeyboardEvent) => {
@@ -133,6 +159,7 @@ function CustomSelect(): JSX.Element {
 
         <select
           className="custom-select__select visually-hidden"
+          name="custom-select"
           value={selectedValue}
         >
           {options.map((option) => (
@@ -142,6 +169,10 @@ function CustomSelect(): JSX.Element {
           ))}
         </select>
       </ul>
+
+      {!isValid && (
+        <p className="custom-select__invalid-text">* Выберите тип упаковки</p>
+      )}
     </div>
   );
 }

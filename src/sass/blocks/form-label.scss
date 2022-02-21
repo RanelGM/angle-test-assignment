@@ -37,3 +37,16 @@
     border-color: $color-black;
   }
 }
+
+.form-label__invalid-text {
+  @include viewport--1023 {
+    top: 35px;
+  }
+
+  position: absolute;
+  top: 40px;
+  z-index: 1;
+  margin: 0;
+  color: $color-red;
+  font-size: 12px;
+}
