@@ -3,15 +3,52 @@ import LoadPending from 'components/load-pending/load-pending';
 import useAsync from 'hooks/useAsync';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { loadProducts } from 'store/action';
+import { loadProducts, setProducts } from 'store/action';
 import { getProducts } from 'store/selectors';
+import { ProductType } from 'types/product';
 import { ThunkActionDispatch } from 'types/store';
 import { Product } from '../components';
+
+const getTotalCost = (products: ProductType[] | null) => {
+  if (!products) {
+    return 0;
+  }
+
+  return products.reduce((sum, product) => sum + product.price * product.amount, 0);
+};
 
 function ProductList(): JSX.Element {
   const products = useSelector(getProducts);
   const dispatch = useDispatch<ThunkActionDispatch>();
-  const totalCost = products ? products.reduce((sum, product) => sum + product.price, 0) : 0;
+  const totalCost = getTotalCost(products);
+
+  const handleProductUpdate = (amount: number, product: ProductType) => {
+    if (!products) {
+      return;
+    }
+
+    const updatingProduct = { ...product, amount };
+    const index = products.indexOf(product);
+    const updatedProducts = [
+      ...products.slice(0, index),
+      updatingProduct,
+      ...products.slice(index + 1),
+    ];
+
+    dispatch(setProducts(updatedProducts));
+  };
+
+  const handleProductDelete = (product: ProductType) => {
+    if (!products) {
+      return;
+    }
+
+    const index = products.indexOf(product);
+    const updatedProducts = products.slice();
+    updatedProducts.splice(index, 1);
+
+    dispatch(setProducts(updatedProducts));
+  };
 
   const fetchProducts = async () => {
     await dispatch(loadProducts());
@@ -43,7 +80,12 @@ function ProductList(): JSX.Element {
 
       <ul className="product-list__list">
         {products.map((product) => (
-          <Product key={product.id} product={product} />
+          <Product
+            key={product.id}
+            product={product}
+            onProductUpdate={handleProductUpdate}
+            onProductDelete={handleProductDelete}
+          />
         ))}
       </ul>
 
