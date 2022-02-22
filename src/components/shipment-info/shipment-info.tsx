@@ -34,11 +34,23 @@ function ShipmentInfo(): JSX.Element {
     const inputsData = Object.fromEntries(formData);
     const isCoords = Boolean(inputsData.coords);
 
-    if (!isCoords) {
+    if (!isCoords || !products) {
       return;
     }
 
-    const jsonData = JSON.stringify(inputsData);
+    const cartData = products.map((product) => {
+      const { id, name, price, amount } = product;
+
+      return ({
+        id,
+        name,
+        price,
+        amount,
+      });
+    });
+
+    const resultData = { ...inputsData, cart: cartData };
+    const jsonData = JSON.stringify(resultData);
 
     // eslint-disable-next-line no-alert
     alert(jsonData);

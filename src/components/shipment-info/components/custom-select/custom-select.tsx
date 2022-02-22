@@ -159,7 +159,7 @@ function CustomSelect({ isValidCheck, onValidCheck }: CustomSelectProps): JSX.El
 
         <select
           className="custom-select__select visually-hidden"
-          name="custom-select"
+          name="package-type"
           value={selectedValue}
         >
           {options.map((option) => (
