@@ -1,11 +1,11 @@
 import { ComponentType } from 'react';
 
 const COUNTRY_CODE = '+7';
-const MATRIX = `${COUNTRY_CODE} (___) ___ __ __`;
+const MATRIX = `${COUNTRY_CODE} (___)-___-__-__`;
 
 function withPhoneMaskInput<T>(Component: ComponentType<T>) {
   function WithPhoneMaskInput(props: T) {
-    const invalidMessage = `Введите в формате: ${COUNTRY_CODE} (123) 456 78 90`;
+    const invalidMessage = `Введите в формате: ${COUNTRY_CODE} (123)-456-78-90`;
 
     const replaceValueByMask = (value: string) => {
       const matrixNumericString = MATRIX.replace(/\D/g, '');
