@@ -88,6 +88,8 @@
 .counter__amount::-webkit-outer-spin-button,
 .counter__amount::-webkit-inner-spin-button {
   margin: 0;
+  /* stylelint-disable-next-line property-no-vendor-prefix */
+  -webkit-appearance: none;
   appearance: none;
 }
 
