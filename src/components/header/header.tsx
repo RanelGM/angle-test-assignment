@@ -1,10 +1,14 @@
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { getProducts } from 'store/selectors';
 import { HeaderNavGroup } from 'utils/const';
 
 const navLinks = Object.values(HeaderNavGroup);
 
 function Header(): JSX.Element {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const products = useSelector(getProducts);
+  const cartCount = products ? products.length : 0;
 
   const onMenuBtnClick = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -115,7 +119,7 @@ function Header(): JSX.Element {
                 width={32}
                 height={27}
               />
-              <span className="control-wrapper__cart-count">4</span>
+              <span className="control-wrapper__cart-count">{cartCount}</span>
             </a>
           </li>
         </ul>
