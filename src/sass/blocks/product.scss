@@ -27,6 +27,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  width: 100%;
 }
 
 .product__info-wrapper {
@@ -68,6 +69,10 @@
 }
 
 .product__description {
+  @include viewport--1023 {
+    max-width: 450px;
+  }
+
   @include viewport--767 {
     display: none;
   }
@@ -98,4 +103,10 @@
   line-height: 16.1px;
   text-decoration: underline;
   cursor: pointer;
+  transition: color 0.3s;
+
+  &:hover,
+  &:focus {
+    color: $color-black;
+  }
 }

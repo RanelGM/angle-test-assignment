@@ -9,9 +9,9 @@ function Breadcrumbs(): JSX.Element {
           </a>
         </li>
         <li className="breadcrumbs__item">
-          <a className="breadcrumbs__link" href="#work-in-progress">
+          <span className="breadcrumbs__link">
             Корзина
-          </a>
+          </span>
         </li>
       </ul>
     </section>

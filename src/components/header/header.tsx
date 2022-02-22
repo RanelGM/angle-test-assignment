@@ -52,6 +52,7 @@ function Header(): JSX.Element {
               className="search-form__input"
               type="search"
               placeholder="Поиск"
+              autoComplete="off"
             />
           </label>
         </form>

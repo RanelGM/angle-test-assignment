@@ -46,6 +46,7 @@
 .product-list__total-text {
   @include viewport--1023 {
     color: $color-black;
+    font-weight: bold;
     font-size: 30px;
   }
 

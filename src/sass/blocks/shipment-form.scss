@@ -41,4 +41,12 @@
   font-size: 20px;
   line-height: 23px;
   letter-spacing: 0.3px;
+  transition: color 0.3s, background-color 0.3s;
+
+  &:hover,
+  &:focus {
+    background-color: $color-black;
+    color: $color-white;
+    cursor: pointer;
+  }
 }

@@ -44,8 +44,11 @@
   cursor: pointer;
   transition: opacity 0.3s;
 
-  &:hover {
-    opacity: 0.3;
+  .control-wrapper__link:hover &,
+  .control-wrapper__link:focus &,
+  .button:hover &,
+  .button:focus & {
+    opacity: 0.5;
   }
 
   &--320vp {

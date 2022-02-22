@@ -27,6 +27,12 @@
 
 .shipment-info__link {
   color: $color-grey;
+  transition: color 0.3s;
+
+  &:hover,
+  &:focus {
+    color: $color-black;
+  }
 }
 
 .shipment-info .custom-select {

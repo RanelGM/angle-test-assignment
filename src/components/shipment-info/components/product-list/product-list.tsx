@@ -99,6 +99,7 @@ function ProductList(): JSX.Element {
         <input
           className="visually-hidden"
           name="total-cost"
+          tabIndex={-1}
           value={totalCost}
           readOnly
         />
