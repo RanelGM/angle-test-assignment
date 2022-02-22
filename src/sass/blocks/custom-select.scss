@@ -14,6 +14,10 @@
   line-height: 19.2px;
   letter-spacing: 0.3px;
   text-align: left;
+
+  .custom-select--error & {
+    border-color: $color-red;
+  }
 }
 
 .custom-select__placeholder {
@@ -26,6 +30,10 @@
     position: absolute;
     transform: translateY(-16px) scale(0.75);
   }
+
+  .custom-select--error & {
+    color: $color-red;
+  }
 }
 
 .custom-select__text {
@@ -36,6 +44,10 @@
   .custom-select--selected & {
     opacity: 1;
     visibility: visible;
+  }
+
+  .custom-select--error & {
+    color: $color-red;
   }
 }
 
@@ -110,6 +122,11 @@
 
   .custom-select--opened &::after {
     transform: rotate(45deg);
+  }
+
+  .custom-select--error &::before,
+  .custom-select--error &::after {
+    background-color: $color-red;
   }
 }
 

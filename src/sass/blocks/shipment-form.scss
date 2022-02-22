@@ -13,6 +13,10 @@
 }
 
 .shipment-form .form-label {
+  @include viewport--1189 {
+    margin-bottom: 40px;
+  }
+
   @include viewport--1023 {
     margin-bottom: 26px;
   }

@@ -137,7 +137,8 @@ function CustomSelect({ isValidCheck, onValidCheck }: CustomSelectProps): JSX.El
   return (
     <div
       className={`custom-select ${isSelectOpen ? 'custom-select--opened' : ''
-      } ${isOptionSelected ? 'custom-select--selected' : ''}`}
+      } ${isOptionSelected ? 'custom-select--selected' : ''
+      } ${isValid ? '' : 'custom-select--error'}`}
       data-select="custom-select"
     >
       <button

@@ -21,6 +21,10 @@
   .form-label--focused & {
     color: $color-black;
   }
+
+  .form-label--error & {
+    color: $color-red;
+  }
 }
 
 .form-label__input {
@@ -36,17 +40,19 @@
   .form-label--focused & {
     border-color: $color-black;
   }
+
+  .form-label--error & {
+    border-color: $color-red;
+    color: $color-red;
+  }
 }
 
 .form-label__invalid-text {
-  @include viewport--1023 {
-    top: 35px;
-  }
-
   position: absolute;
-  top: 40px;
+  top: 37px;
   z-index: 1;
   margin: 0;
   color: $color-red;
   font-size: 12px;
+  line-height: 14px;
 }

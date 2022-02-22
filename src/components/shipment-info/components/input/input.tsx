@@ -43,12 +43,19 @@ const Input = forwardRef<HTMLInputElement, InputProps>((props, forwardedRef) => 
   const errorMessage = invalidMessage || 'Поле обязательно к заполнению';
 
   const checkValidity = useCallback((input: HTMLInputElement) => {
+    const label = input.parentElement;
     const min = (minLength || required) ? (minLength || 1) : 0;
     const isLesserThanMin = input.value.length < min;
     const isGreaterThanMax = maxLength && input.value.length > maxLength;
     const isInputValid = customCheck ? customCheck(input) : !(isLesserThanMin || isGreaterThanMax);
 
     setIsValid(isInputValid);
+
+    if (!isInputValid) {
+      label?.classList.add('form-label--error');
+    } else {
+      label?.classList.remove('form-label--error');
+    }
 
     if (onValidCheck) {
       onValidCheck({ [name]: isInputValid });
