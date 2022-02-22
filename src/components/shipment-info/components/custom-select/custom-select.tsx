@@ -123,6 +123,7 @@ function CustomSelect({ isValidCheck, onValidCheck }: CustomSelectProps): JSX.El
     if (isEnterKeydown) {
       setSelectedLabel(option);
       setIsSelectOpen(false);
+      setIsValid(true);
       return;
     }
 
