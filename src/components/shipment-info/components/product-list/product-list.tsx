@@ -21,6 +21,7 @@ function ProductList(): JSX.Element {
   const products = useSelector(getProducts);
   const dispatch = useDispatch<ThunkActionDispatch>();
   const totalCost = getTotalCost(products);
+  const isTotalCostShow = Boolean(products?.length);
 
   const handleProductUpdate = (amount: number, product: ProductType) => {
     if (!products) {
@@ -89,21 +90,28 @@ function ProductList(): JSX.Element {
         ))}
       </ul>
 
-      <div className="product-list__total">
-        <p className="product-list__total-text">Итог:</p>
-        <p className="product-list__total-text">
-          {totalCost}
-          {' '}
-          руб.
-        </p>
-        <input
-          className="visually-hidden"
-          name="total-cost"
-          tabIndex={-1}
-          value={totalCost}
-          readOnly
-        />
-      </div>
+      {isTotalCostShow && (
+        <div className="product-list__total">
+          <p className="product-list__total-text">Итог:</p>
+          <p className="product-list__total-text">
+            {totalCost}
+            {' '}
+            руб.
+          </p>
+          <input
+            className="visually-hidden"
+            name="total-cost"
+            tabIndex={-1}
+            value={totalCost}
+            readOnly
+          />
+        </div>
+      )}
+
+      {!isTotalCostShow && (
+        <p className="product-list__empty-text">Корзина пуста.</p>
+      )}
+
     </section>
   );
 }

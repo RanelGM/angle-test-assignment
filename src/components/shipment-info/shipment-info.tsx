@@ -19,7 +19,7 @@ function ShipmentInfo(): JSX.Element {
   const formRef = useRef<HTMLFormElement | null>(null);
   const validationStatus = useRef<ValidationStatus | null>(null);
   const products = useSelector(getProducts);
-  const isButtonShow = Boolean(products);
+  const isButtonShow = Boolean(products?.length);
 
   const submitForm = () => {
     setIsFormSubmitting(false);
