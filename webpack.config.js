@@ -3,6 +3,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
+const postcssPresetEnv = require("postcss-preset-env");
 
 module.exports = (env) => {
   const isDevelopment = env.development;
@@ -38,7 +39,17 @@ module.exports = (env) => {
         },
         {
           test: /\.s[ac]ss$/,
-          use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
+          use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader", {
+            loader: "postcss-loader",
+            options: {
+              postcssOptions: {
+                plugins: [
+                  [postcssPresetEnv()],
+                ],
+              },
+            },
+          }],
+
         },
         {
           test: /\.(png|svg|jpg|jpeg|gif)$/i,
