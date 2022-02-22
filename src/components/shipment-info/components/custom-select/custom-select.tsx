@@ -1,4 +1,4 @@
-import { KeyboardEvent as ReactKeyboardEvent, MouseEvent as ReactMouseEvent, useEffect, useState } from 'react';
+import { FocusEvent, KeyboardEvent as ReactKeyboardEvent, MouseEvent as ReactMouseEvent, useEffect, useState } from 'react';
 import { PackageLabel } from 'types/product';
 import { PackageGroup } from 'utils/const';
 
@@ -72,8 +72,20 @@ function CustomSelect({ isValidCheck, onValidCheck }: CustomSelectProps): JSX.El
     };
   });
 
-  const handleButtonClick = () => {
+  const handleButtonMouseDown = () => {
     setIsSelectOpen(!isSelectOpen);
+  };
+
+  const handleButtonFocus = () => {
+    setIsSelectOpen(true);
+  };
+
+  const handleButtonBlur = (evt: FocusEvent) => {
+    const isSelectItem = evt.relatedTarget?.closest('.custom-select__item');
+
+    if (!isSelectItem) {
+      setIsSelectOpen(false);
+    }
   };
 
   const handleSelectClick = (evt: ReactMouseEvent) => {
@@ -131,7 +143,9 @@ function CustomSelect({ isValidCheck, onValidCheck }: CustomSelectProps): JSX.El
       <button
         className="custom-select__button"
         type="button"
-        onClick={handleButtonClick}
+        onMouseDown={handleButtonMouseDown}
+        onFocus={handleButtonFocus}
+        onBlur={handleButtonBlur}
       >
         <span className="custom-select__placeholder">Тип упаковки</span>
         <span className="custom-select__icon" />
