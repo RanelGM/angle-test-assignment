@@ -171,19 +171,19 @@ function CustomSelect({ isValidCheck, onValidCheck }: CustomSelectProps): JSX.El
             </li>
           );
         })}
-
-        <select
-          className="custom-select__select visually-hidden"
-          name="package-type"
-          value={selectedValue}
-        >
-          {options.map((option) => (
-            <option key={`key-${option.value}`} value={option.value}>
-              {option.label}
-            </option>
-          ))}
-        </select>
       </ul>
+
+      <select
+        className="custom-select__select visually-hidden"
+        name="package-type"
+        value={selectedValue}
+      >
+        {options.map((option) => (
+          <option key={`key-${option.value}`} value={option.value}>
+            {option.label}
+          </option>
+        ))}
+      </select>
 
       {!isValid && (
         <p className="custom-select__invalid-text">* Выберите тип упаковки</p>
