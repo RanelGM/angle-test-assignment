@@ -122,7 +122,7 @@ function Map() {
           mapRef.current = ref;
         }}
       >
-        {coords && (
+        {coords && address && (
         <Placemark geometry={coords} />
         )}
 

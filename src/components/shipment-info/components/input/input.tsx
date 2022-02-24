@@ -1,4 +1,4 @@
-import { ChangeEvent, forwardRef, KeyboardEvent, useCallback, useEffect, useRef, useState } from 'react';
+import { ChangeEvent, KeyboardEvent, useCallback, useEffect, useRef, useState } from 'react';
 
 export type ValidationStatus = {
   [name: string]: boolean,
@@ -8,6 +8,7 @@ type InputParams = {
   children: string,
   name: string,
   type: string,
+  forwardValue?: string,
   autoComplete?: 'on' | 'off',
 };
 
@@ -31,14 +32,14 @@ type ExtraCallbackParams = {
 
 type InputProps = InputParams & ValidationParams & ExtraCallbackParams;
 
-const Input = forwardRef<HTMLInputElement, InputProps>((props, forwardedRef) => {
+function Input(props: InputProps) {
+  const { children, name, type, forwardValue, autoComplete, required } = props;
+  const { isValidCheck, onValidCheck, customCheck, minLength, maxLength, invalidMessage } = props;
+  const { onInputBlur, onChangeValueReplacer, onFocusValueReplacer, onBlurValueReplacer } = props;
+
   const [value, setValue] = useState('');
   const [isValid, setIsValid] = useState(true);
   const inputRef = useRef<HTMLInputElement | null>(null);
-
-  const { isValidCheck, onValidCheck, customCheck, minLength, maxLength, invalidMessage } = props;
-  const { children, name, type, autoComplete, required } = props;
-  const { onInputBlur, onChangeValueReplacer, onFocusValueReplacer, onBlurValueReplacer } = props;
 
   const errorMessage = invalidMessage || 'Поле обязательно к заполнению';
 
@@ -63,14 +64,22 @@ const Input = forwardRef<HTMLInputElement, InputProps>((props, forwardedRef) => 
   }, [required, customCheck, minLength, maxLength, onValidCheck, name]);
 
   useEffect(() => {
-    const ref = forwardedRef || inputRef;
+    if (forwardValue && inputRef.current) {
+      inputRef.current.value = forwardValue;
+      inputRef.current.parentElement?.classList.add('form-label--filled');
 
-    if (!required || !isValidCheck || typeof (ref) === 'function' || !ref.current) {
+      setValue(forwardValue);
+      checkValidity(inputRef.current);
+    }
+  }, [forwardValue, setValue, inputRef, checkValidity]);
+
+  useEffect(() => {
+    if (!required || !isValidCheck || !inputRef.current) {
       return;
     }
 
-    checkValidity(ref.current);
-  }, [required, forwardedRef, inputRef, isValidCheck, checkValidity]);
+    checkValidity(inputRef.current);
+  }, [required, inputRef, isValidCheck, checkValidity]);
 
   const handleInputChange = ({ target: input }: ChangeEvent<HTMLInputElement>) => {
     const inputValue = onChangeValueReplacer ? onChangeValueReplacer(input.value) : input.value;
@@ -124,7 +133,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>((props, forwardedRef) => 
       <span className="form-label__text">{children}</span>
       <input
         className="form-label__input"
-        ref={forwardedRef || inputRef}
+        ref={inputRef}
         id={name}
         name={name}
         type={type}
@@ -143,6 +152,6 @@ const Input = forwardRef<HTMLInputElement, InputProps>((props, forwardedRef) => 
       )}
     </label>
   );
-});
+}
 
 export default Input;
